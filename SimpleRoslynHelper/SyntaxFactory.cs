@@ -12,6 +12,19 @@ namespace SimpleRoslynHelper;
 public static class SyntaxFactory
 {
     /// <summary>
+    /// Add the comment
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
+    /// <param name="node"></param>
+    /// <param name="comment"></param>
+    /// <returns></returns>
+    public static TNode WithXmlComment<TNode>(this TNode node, string comment)
+        where TNode : SyntaxNode
+    {
+        return node.WithLeadingTrivia(TriviaList([Comment(comment)]));
+    }
+
+    /// <summary>
     /// Generate a node by the string.
     /// </summary>
     /// <typeparam name="TNode"></typeparam>
