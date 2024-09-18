@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,11 +17,13 @@ public static class RoslynExtensions
     /// </summary>
     /// <typeparam name="T">The node type</typeparam>
     /// <param name="node"></param>
+    /// <param name="removedNodes">the nodes need to removed.</param>
     /// <returns></returns>
-    public static IEnumerable<T> GetChildren<T>(this SyntaxNode node) where T : SyntaxNode
+    public static IEnumerable<T> GetChildren<T>(this SyntaxNode node, params SyntaxNode[] removedNodes) where T : SyntaxNode
     {
+        if (removedNodes.Contains(node)) return [];
         if (node is T result) return [result];
-        return node.ChildNodes().SelectMany(GetChildren<T>);
+        return node.ChildNodes().SelectMany(n => n.GetChildren<T>(removedNodes));
     }
 
     /// <summary>
