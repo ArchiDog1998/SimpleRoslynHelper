@@ -13,6 +13,21 @@ namespace SimpleRoslynHelper;
 public static class RoslynExtensions
 {
     /// <summary>
+    /// Get the base types and this type.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public static IEnumerable<ITypeSymbol> GetBaseTypesAndThis(this ITypeSymbol type)
+    {
+        var current = type;
+        while (current != null)
+        {
+            yield return current;
+            current = current.BaseType;
+        }
+    }
+
+    /// <summary>
     /// All the Children in this type.
     /// </summary>
     /// <typeparam name="T">The node type</typeparam>
