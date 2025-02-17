@@ -1,5 +1,11 @@
 # SimpleRoslynHelper
 
+> [!IMPORTANT]
+>  This repo was moved to [ArchiToolkit.RoslynHelper](https://github.com/ArchiDog1998/ArchiToolkit/tree/main/src/libraries/ArchiToolkit.RoslynHelper)!
+> 
+
+
+
 ## Usage
 ``` xml
 	<ItemGroup>
